@@ -38,36 +38,20 @@ namespace task2
                         sumArr1 += arr2[j, a];
                     }
 
-                    for(int b = 0; b < arr2.GetLength(1); b++) {
+                    for(int b = 0; b < arr2.GetLength(1)-1; b++) {
                         sumArr2 += arr2[j+1, b];
                     }
 
                     if (sumArr1 < sumArr2) {
                         
-                        int temp = arr2[j];
-                        arr2[j] = arr2[j+1];
-                        arr2[j+1] = temp;
+                        int temp = arr2[i,j];
+                        arr2[i,j] = arr2[i,j+1];
+                        arr2[i,j+1] = temp;
                     }
                 }
             }
             
-            for (int i = 0; i < arr2.GetLength(0); i++) // Array Sorting
-            {
-                for (int j = arr2.GetLength(1) - 1; j > 0; j--)
-                {
-
-                    for (int z = 0; z < j; z++)
-                    {
-                        if (arr2[i, z] > arr2[i, z + 1])
-                        {
-                            int temp = arr2[i, z];
-                            arr2[i, z] = arr2[i, z + 1];
-                            arr2[i, z + 1] = temp;
-                        }
-                    }
-                }
-                Console.WriteLine();
-            }
+            
             for (int i = 0; i < rows; i++){
                 for (int j = 0; j < k; j++){
                     Console.Write("   " + arr2[i, j]);
