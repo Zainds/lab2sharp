@@ -4,6 +4,7 @@ namespace lab2sharp
 {
     internal class Program
     {
+        
         public static void Main(string[] args)
         {
             int n = 6;

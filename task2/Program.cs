@@ -1,10 +1,32 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 
 namespace task2
 {
+    
     internal class Program
     {
+        
+        public static void mysw(int[,] a, int indexOne, int indexTwo)
+        {
+            if (a == null){ throw new ArgumentNullException("a"); } 
+            if (a.Rank != 2) { throw new InvalidOperationException("..."); }
+
+            
+            if (a.GetLowerBound(0) != 0) { throw new InvalidOperationException("..."); }
+            if (a.GetLowerBound(1) != 0) { throw new InvalidOperationException("..."); }
+
+            if (indexOne >= a.GetUpperBound(0)) { throw new InvalidOperationException("ss"); }
+            if (indexTwo >= a.GetUpperBound(0)) { throw new InvalidOperationException(".sss"); }
+
+            for (int i = 0; i <= a.GetUpperBound(1); ++i) {
+                var t = a[indexOne, i];
+                a[indexOne, i] = a[indexTwo, i];
+                a[indexTwo, i] = t;
+            }
+            
+        }
         public static void delete0rows(int[,] arr, int n, int k){
             int rows = 0;
             for (int i = 0; i<n; i++){
@@ -28,28 +50,27 @@ namespace task2
                 }
                 else rowback -=1;
             }
-                
-            for (int i = 0; i < arr2.GetLength(0); i++) {
-                for (int j = 0; j < arr2.GetLength(1)-i-1; j++) {
-                    int sumArr1 = 0;
-                    int sumArr2 = 0;
+            
+            for (int i = 0; i < arr2.GetLength(0)-2; i++)
+            {
+                int summ1 = 0;
+                int summ2 = 0;
+                for (int j = 0; j < arr2.GetLength(1); j++)
+                {
+                    summ1 += arr2[i, j];
+                    summ2 += arr2[i + 1, j];
 
-                    for(int a = 0; a < arr2.GetLength(1); a++) {
-                        sumArr1 += arr2[j, a];
-                    }
-
-                    for(int b = 0; b < arr2.GetLength(1)-1; b++) {
-                        sumArr2 += arr2[j+1, b];
-                    }
-
-                    if (sumArr1 < sumArr2) {
-                        
-                        int temp = arr2[i,j];
-                        arr2[i,j] = arr2[i,j+1];
-                        arr2[i,j+1] = temp;
-                    }
                 }
+
+                if (summ1 > summ2) {
+                    mysw(arr2, i, i + 1);
+                }
+                
             }
+            
+            
+
+            
             
             
             for (int i = 0; i < rows; i++){
@@ -61,6 +82,7 @@ namespace task2
 
 
         }
+        
         public static void Main(string[] args)
         {
             int n, k;
